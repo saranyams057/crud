@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CRUD App</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+      
+  
+    <div class="container mt-4">
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="banner">
+                    <div class="banner-text" style="text-align:center;">
+                        <h1>SIMPLE CRUD OPERATION</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post" class="p-3 shadow">
+                {% csrf_token %}
+                    <div class="form-group">
+                        <label for="slno">SL NO</label>
+                        <input type="text" class="form-control" name="slno" placeholder="SL No:" id="slno"><br>
+                    </div>
+                    <div class="form-group">
+                      <label for="itemname">Item Name</label>
+                        <input type="text" id=itemname class="form-control" name="itemname" placeholder="Item name"><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="desc">Description</label>
+                        <input type="text" id="desc" class="form-control" name="description" placeholder="Description"><br>
+                    </div>
+                        <input type="submit" class="btn btn-success">
+    
+                </form>
+            </div>
+        </div>
+        <div class="box">
+          {% if messages %}
+              {% for msgs in messages %}
+                  {{msgs}}
+              {% endfor %}
+          {% endif %}
+        </div>
+        <br><br>
+        <div class="container-fluid" style="margin-top: 15px;">
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">SL No</th>
+                        <th scope="col">Item Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for i in crud1 %}
+                      <tr>
+                        <!-- <th scope="row"></th> -->
+                        <td>{{i.slno}}</td>
+                        <td>{{i.itemname}}</td>
+                        <td>{{i.description}}</td>
+                      <td>
+                          <div class="row">
+                              <div class="col-3">
+                                  <a href="{% url 'update' i.id %}" class="btn btn-warning">Update</a>
+                                  <!-- <button type="button" class="btn btn-warning">Update</button> -->
+                              </div>
+                              &nbsp;&nbsp;
+                              <div class="col-3">
+                                  <a href="{% url 'delete' i.id %}" class="btn btn-danger">Delete</a>
+                                  <!-- <button type="button" class="btn btn-danger">Delete</button> -->
+                              </div>
+                          </div>
+                      </td>
+                            {% endfor %}
+                          </tbody>
+                      </table>
+            </div>
+    </div>
+    </div>
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  
+</body>
+</html>

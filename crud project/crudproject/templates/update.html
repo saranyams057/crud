@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <title>
+        Crud Operations
+    </title>
+    <head >
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet"   href="{% static 'style.css' %}">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="banner">
+                       <div class="banner-text" >
+                            <h1>SIMPLE CRUD OPERATIONS</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form method="POST">
+                    {% csrf_token %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <label for="slno">Serial Number:</label>
+                        <input type="text" name="slno" id="slno" value="{{ contact.slno }}" required><br><br>
+                        
+                        <label for="itemname">Item Name:</label>
+                        <input type="text" name="itemname" id="itemname" value="{{ contact.itemname }}" required><br><br>
+                        
+                        <label for="description">Description:</label>
+                        <textarea name="description" id="description" rows="4" required>{{ contact.description }}</textarea><br><br>
+                        
+                        <input type="submit" value="Update">
+                      </form>
+                    <!-- <h3>{{f.as_p}}</h3>
+                    <input type="submit"> -->
+                </form>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="box">
+        {% if messages %}
+             {% for msgs in messages %}
+                 {{msgs}}
+             {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>
